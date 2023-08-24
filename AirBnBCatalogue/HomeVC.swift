@@ -9,6 +9,15 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    
+    lazy var featuredLocationData: [LocationModel] = {
+        return LocationModel.featuredData
+    }()
+    
+    lazy var recommendedLocationData: [LocationModel] = {
+        return LocationModel.recommendData
+    }()
+    
     private let images: [UIImage] = [
         UIImage(named: "1")!,
         UIImage(named: "2")!,
@@ -25,7 +34,11 @@ class HomeVC: UIViewController {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(RecommendedTableViewCell.self, forCellReuseIdentifier: RecommendedTableViewCell.identifier)
-        tableView.allowsSelection = true
+        tableView.register(FeaturedTableViewCell.self, forCellReuseIdentifier:  FeaturedTableViewCell.identifier)
+        tableView.allowsSelection = false
+        tableView.rowHeight = CGFloat(396.0)
+        tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
         return tableView
     }()
 
@@ -40,6 +53,8 @@ class HomeVC: UIViewController {
     }
     
     func setupUI() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Places"
         view.backgroundColor = .systemBackground
         view.addSubview(tableView)
         tableView.dataSource = self
@@ -63,11 +78,30 @@ class HomeVC: UIViewController {
 
 extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return featuredLocationData.count
+        }
+        
+        
         return images.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: FeaturedTableViewCell.identifier, for: indexPath) as? FeaturedTableViewCell else {
+                return UITableViewCell()
+            }
+            
+            cell.topLocationsData = featuredLocationData
+            return cell
+        }
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: RecommendedTableViewCell.identifier, for: indexPath) as? RecommendedTableViewCell else {
             fatalError("The tableView could not dequeue RecommendedTableViewCell in the view controller")
         }
@@ -75,13 +109,14 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
         let image = self.images[indexPath.row]
         cell.configure(with: image)
         return cell
-        
-//        cell.textLabel?.text = "Carrington"
-//        cell.detailTextLabel?.text = "Manyuchi"
-//        return cell
+
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 125
-//    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return CGFloat(396.0)
+        }
+        
+        return CGFloat(125.0)
+    }
 }

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionViewCellDemo" customModule="AirBnBCatalogue" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="345" height="376"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="345" height="376"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ubb-xg-XGY">
+                        <rect key="frame" x="10" y="10" width="325" height="356"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="31F-DE-ntC">
+                                <rect key="frame" x="0.0" y="0.0" width="325" height="249.66666666666666"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="31F-DE-ntC" secondAttribute="height" multiplier="69:53" id="99a-ip-J2f"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="31F-DE-ntC" firstAttribute="leading" secondItem="Ubb-xg-XGY" secondAttribute="leading" id="Htv-1B-NgC"/>
+                            <constraint firstAttribute="trailing" secondItem="31F-DE-ntC" secondAttribute="trailing" id="bMO-pn-aeS"/>
+                            <constraint firstItem="31F-DE-ntC" firstAttribute="top" secondItem="Ubb-xg-XGY" secondAttribute="top" id="zL2-11-99W"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="Ubb-xg-XGY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="CY6-1u-dwl"/>
+                <constraint firstAttribute="bottom" secondItem="Ubb-xg-XGY" secondAttribute="bottom" constant="10" id="SRV-BU-aEe"/>
+                <constraint firstAttribute="trailing" secondItem="Ubb-xg-XGY" secondAttribute="trailing" constant="10" id="iPC-ls-FQZ"/>
+                <constraint firstItem="Ubb-xg-XGY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="jyi-2f-6vi"/>
+            </constraints>
+            <size key="customSize" width="447" height="256"/>
+            <point key="canvasLocation" x="122.90076335877862" y="53.521126760563384"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

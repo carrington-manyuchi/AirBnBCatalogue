@@ -13,10 +13,10 @@ class RecommendedTableViewCell: UITableViewCell {
     private let backView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 7
+        view.layer.cornerRadius = 10
         view.layer.shadowOpacity = 0.7
-        view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        view.layer.shadowOffset = CGSize(width: 3, height: 2)
+        view.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.4).cgColor
+        view.layer.shadowOffset = CGSize(width: -3, height: 7)
         view.layer.shadowRadius = 5
         
         view.layer.borderColor = UIColor.red.cgColor
