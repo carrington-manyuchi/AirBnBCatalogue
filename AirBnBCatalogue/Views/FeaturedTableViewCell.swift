@@ -9,6 +9,8 @@ import UIKit
 
 class FeaturedTableViewCell: UITableViewCell {
     
+    
+    
     public static let identifier = "FeaturedTableViewCell"
     
     var topLocationsData: [LocationModel] = [LocationModel]() {
@@ -19,16 +21,20 @@ class FeaturedTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     
-    private let collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    public let collectionView: UICollectionView = {
+        
+        
+        let layout = UICollectionViewFlowLayout()
+        
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.contentInsetAdjustmentBehavior = .never
+        collectionView.contentInsetAdjustmentBehavior = .automatic
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         collectionView.register(TopLocationCollectionViewCell.self, forCellWithReuseIdentifier: TopLocationCollectionViewCell.identifier)
         
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        //let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 25.0
         layout.minimumInteritemSpacing = 25.0
@@ -38,12 +44,13 @@ class FeaturedTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        collectionView.delegate = self
-//        collectionView.dataSource .self
+        setupViewss()
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        setupViewss()
 
     }
     
@@ -55,11 +62,31 @@ class FeaturedTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setupViewss() {
+        collectionView.delegate = self
+        collectionView.dataSource =  self
+        self.addSubview(collectionView)
+        collectionView.backgroundColor = .yellow
+        composeConstraints()
+    }
+    
+    func composeConstraints() {
+        let composeCollectionViewConstraints = [
+            collectionView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ]
+        
+        NSLayoutConstraint.activate(composeCollectionViewConstraints)
+    }
+    
 }
 
 //MARK: - DELEGATES AND DATASOURCE
 
 extension FeaturedTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return topLocationsData.count
     }

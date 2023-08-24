@@ -9,7 +9,6 @@ import UIKit
 
 class HomeVC: UIViewController {
     
-    
     lazy var featuredLocationData: [LocationModel] = {
         return LocationModel.featuredData
     }()
@@ -36,7 +35,7 @@ class HomeVC: UIViewController {
         tableView.register(RecommendedTableViewCell.self, forCellReuseIdentifier: RecommendedTableViewCell.identifier)
         tableView.register(FeaturedTableViewCell.self, forCellReuseIdentifier:  FeaturedTableViewCell.identifier)
         tableView.allowsSelection = false
-        tableView.rowHeight = CGFloat(396.0)
+        //xtableView.rowHeight = CGFloat(396.0)
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         return tableView
@@ -114,7 +113,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return CGFloat(396.0)
+            return CGFloat(200.0)
         }
         
         return CGFloat(125.0)
