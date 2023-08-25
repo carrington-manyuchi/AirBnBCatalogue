@@ -9,7 +9,16 @@ import UIKit
 
 class FeaturedTableViewCell: UITableViewCell {
     
-    
+    private var pics: [UIImage] = [
+        UIImage(named: "1")!,
+        UIImage(named: "2")!,
+        UIImage(named: "3")!,
+        UIImage(named: "4")!,
+        UIImage(named: "5")!,
+        UIImage(named: "6")!,
+        UIImage(named: "7")!,
+        UIImage(named: "8")!
+    ]
     
     public static let identifier = "FeaturedTableViewCell"
     
@@ -24,17 +33,18 @@ class FeaturedTableViewCell: UITableViewCell {
     public let collectionView: UICollectionView = {
         
         
-        let layout = UICollectionViewFlowLayout()
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        //let layout = UICollectionViewFlowLayout()
+        //layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.contentInsetAdjustmentBehavior = .automatic
+        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 25, bottom: 0, right: 25)
+        
         collectionView.register(TopLocationCollectionViewCell.self, forCellWithReuseIdentifier: TopLocationCollectionViewCell.identifier)
         
-        //let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 25.0
         layout.minimumInteritemSpacing = 25.0
@@ -75,6 +85,7 @@ class FeaturedTableViewCell: UITableViewCell {
             collectionView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 370),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ]
         
@@ -88,7 +99,8 @@ class FeaturedTableViewCell: UITableViewCell {
 extension FeaturedTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return topLocationsData.count
+        //return topLocationsData.count
+        return pics.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -96,14 +108,18 @@ extension FeaturedTableViewCell: UICollectionViewDelegate, UICollectionViewDataS
             return UICollectionViewCell()
         }
         
-        let location = topLocationsData[indexPath.row]
-        cell.imageView.image = location.locationImage
+       // let location = topLocationsData[indexPath.row]
+      //  cell.imageView.image = location.locationImage
+        
+        let pic = pics[indexPath.row]
+        cell.configure(with: pic)
+        // cell.imageView.image = pic
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let screenWidth = UIScreen.main.bounds.size.width
-        return CGSize(width: screenWidth, height: 370)
+        //let screenWidth = UIScreen.main.bounds.size.width
+        return CGSize(width: UIScreen.main.bounds.size.width , height: 370)
     }
     
 }

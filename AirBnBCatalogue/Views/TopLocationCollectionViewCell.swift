@@ -12,7 +12,7 @@ class TopLocationCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    public static let identifier = "TopLocationCollectionViewCell"
+    static let identifier = "TopLocationCollectionViewCell"
     
     
     private let mainView: UIView = {
@@ -49,23 +49,27 @@ class TopLocationCollectionViewCell: UICollectionViewCell {
         setupCollectionViews()
     }
     
-    
+    public func configure(with pic: UIImage) {
+        self.imageView.image = pic
+        self.setupCollectionViews()
+    }
         
     //MARK: - setup Views
 
     func setupCollectionViews() {
-        contentView.addSubview(mainView)
-        contentView.addSubview(imageView)
+        self.backgroundColor = .brown
+        self.addSubview(mainView)
+        self.addSubview(imageView)
         composeConstraints()
     }
     
     
     func composeConstraints() {
         let composeMainViewConstraints = [
-            mainView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            mainView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            mainView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
+            mainView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            mainView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            mainView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10)
         ]
         
         let composeImageViewConstraints = [
@@ -78,6 +82,11 @@ class TopLocationCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate(composeMainViewConstraints)
         NSLayoutConstraint.activate(composeImageViewConstraints)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = nil
     }
     
     

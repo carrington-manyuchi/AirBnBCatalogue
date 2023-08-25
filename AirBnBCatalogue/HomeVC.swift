@@ -9,6 +9,18 @@ import UIKit
 
 class HomeVC: UIViewController {
     
+    private let pics: [UIImage] = [
+        UIImage(named: "1")!,
+        UIImage(named: "2")!,
+        UIImage(named: "3")!,
+        UIImage(named: "4")!,
+        UIImage(named: "5")!,
+        UIImage(named: "6")!,
+        UIImage(named: "7")!,
+        UIImage(named: "8")!
+        
+    ]
+    
     lazy var featuredLocationData: [LocationModel] = {
         return LocationModel.featuredData
     }()
@@ -35,7 +47,7 @@ class HomeVC: UIViewController {
         tableView.register(RecommendedTableViewCell.self, forCellReuseIdentifier: RecommendedTableViewCell.identifier)
         tableView.register(FeaturedTableViewCell.self, forCellReuseIdentifier:  FeaturedTableViewCell.identifier)
         tableView.allowsSelection = false
-        //xtableView.rowHeight = CGFloat(396.0)
+        tableView.rowHeight = CGFloat(396.0)
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         return tableView
@@ -55,9 +67,10 @@ class HomeVC: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "Places"
         view.backgroundColor = .systemBackground
-        view.addSubview(tableView)
+       
         tableView.dataSource = self
         tableView.delegate = self
+        view.addSubview(tableView)
         setupConstraints()
     }
     
@@ -67,7 +80,9 @@ class HomeVC: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            tableView.heightAnchor.constraint(equalToConstant: 370)
         ]
         
         NSLayoutConstraint.activate(composeTableView)
@@ -83,7 +98,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return featuredLocationData.count
+            return 1
         }
         
         
@@ -97,7 +112,9 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
                 return UITableViewCell()
             }
             
-            cell.topLocationsData = featuredLocationData
+            //cell.topLocationsData = featuredLocationData
+            
+
             return cell
         }
         
@@ -113,7 +130,7 @@ extension HomeVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return CGFloat(200.0)
+            return CGFloat(370)
         }
         
         return CGFloat(125.0)
