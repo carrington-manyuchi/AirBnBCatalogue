@@ -1,7 +1,7 @@
 # AirBnBCatalogue
 
 
-In this project i was copying the design of AirBnB and try to implement it in swift
+In this project i was copying the design of AirBnB and try to implement it in swift. The project was built using Programmatic UIKIt
 
 ![Screenshot 2023-11-09 at 10 36 02](https://github.com/carrington-manyuchi/AirBnBCatalogue/assets/60835640/806a7a3f-0527-4863-9177-d463d8a00147)
 
